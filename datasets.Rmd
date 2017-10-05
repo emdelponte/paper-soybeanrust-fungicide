@@ -1,0 +1,43 @@
+---
+title: "paper-soybeanrust-fungicide"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readr)
+
+```
+
+## Introduction
+
+This document provides a way to reproduce some of the analyses and plots produced for a paper published in Plant Disease. In the paper, meta-analysis is used to summarize the means of percent control and yield response from using different fungicides to control a fungal soybean disease - soybean rust. The main objective of the work was to fit a meta-regression model to the data by testing the effect of year in the estimates, which was apparently affecting both responses based on graphical analysis. The data from each variable are available in this repository and the codes are provided below to reproduce portion of the work. 
+
+
+## Import data
+
+The data were prepared in excel spreadsheet and exported to csv. The two datasets are separated by response variable because they did not occur in all trial. They could be combined in a single dataset, but are kept separated for convenience. 
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+sev <- read_csv("sev_data.csv")
+yld <- read_csv("yld_data.csv")
+```
+
+Let's have a close look at the variables and the first ten row. We can identify six variables on each dataset, including the disease and the yield variable. The five common variables are:
+
+- trial: numeric. identifier for the trial
+- severity: numeric. disease intensitiy variable (0 - 100)
+- mse: numeric. mean square error for the trial
+- active_ingredient: character. identifier for the fungicide
+- year: numeric. Harvest year of the crop
+- spray: numeric. Number of sprays for the treatment
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+head(sev, 10)
+```
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+head(yld, 10)
+```
+
+
+
